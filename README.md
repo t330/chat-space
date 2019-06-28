@@ -34,7 +34,8 @@
 
 ### Association
 - has_many :messages
-- belongs_to :group
+- has_many :members
+- has_many :group, through :members
 
 * * *
 
@@ -45,7 +46,11 @@
 |group_id|integer|null: false, unique: true|
 
 ### Association
-- has_many :users
+- has_many :users, through :members
+- has_many :members
+
+///
+
 
 
 # README
