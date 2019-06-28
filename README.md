@@ -1,8 +1,8 @@
 ### members table
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|user|reference|null: false, foreign_key: true|
+|group|reference|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :group
@@ -15,7 +15,7 @@
 |------|----|-------|
 |body|text|--|
 |image|string|--|
-|user_id|integer|null: false, foreign_key: true|
+|user|reference|null: false, foreign_key: true|
 |group_id|integer|null: false, unique: true|
 
 ### Association
@@ -35,19 +35,19 @@
 ### Association
 - has_many :messages
 - has_many :members
-- has_many :group, through :members
+- has_many :group, through: :members
 
 * * *
 
 ### groups table
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, unique: true|
+|name|reference|null: false, foreign_key: true|
 
 ### Association
-- has_many :users, through :members
+- has_many :users, through: :members
 - has_many :members
+- has_many :messages
 
 ///
 
