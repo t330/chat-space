@@ -1,8 +1,8 @@
 ### members table
 |Column|Type|Options|
 |------|----|-------|
-|user|reference|null: false, foreign_key: true|
-|group|reference|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
+|group|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :group
@@ -15,8 +15,8 @@
 |------|----|-------|
 |body|text|--|
 |image|string|--|
-|user|reference|null: false, foreign_key: true|
-|group_id|integer|null: false, unique: true|
+|user|references|null: false, foreign_key: true|
+|group|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :group
@@ -42,7 +42,7 @@
 ### groups table
 |Column|Type|Options|
 |------|----|-------|
-|name|reference|null: false, foreign_key: true|
+|name|string|null: false|
 
 ### Association
 - has_many :users, through: :members
