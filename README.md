@@ -1,3 +1,53 @@
+### members table
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null: false, foreign_key: true|
+|group_id|integer|null: false, foreign_key: true|
+
+### Association
+- belongs_to :group
+- belongs_to :user
+
+* * *
+
+### messages table
+|Column|Type|Options|
+|------|----|-------|
+|body|text|--|
+|image|string|--|
+|user_id|integer|null: false, foreign_key: true|
+|group_id|integer|null: false, unique: true|
+
+### Association
+- belongs_to :group
+- belongs_to :user
+
+* * *
+
+### users table
+|Column|Type|Options|
+|------|----|-------|
+|id|integer|null: false, unique: true|
+|email|string|null: false, unique: true|
+|password|string|null: false, unique: true|
+|nickname|string|null: false, unique: true|
+
+### Association
+- has_many :messages
+- belongs_to :group
+
+* * *
+
+### groups table
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null: false, foreign_key: true|
+|group_id|integer|null: false, unique: true|
+
+### Association
+- has_many :users
+
+
 # README
 
 This README would normally document whatever steps are necessary to get the
