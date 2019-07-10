@@ -1,40 +1,19 @@
 .wrapper
 
-  = render 'layouts/message'
+  = render 'devise/shared/side_bar'
 
   .chat-main
-    .main-header
-      .main-header__left-box
-        %h2.main-header__left-box__current-group
-          AA
-        %ul.main-header__left-box__member-list
-          Member:
-          %li.main-header__left-box__member-list__member
-            SS
-      = link_to '#' do
-        .main-header__edit-btn
-          Edit
+    
+    = render @group
+
     .messages
-      .message
-        .message__upper-info
-          %p.message__upper-info__talker
-            aaa
-          %p.message__upper-info__date
-            bbb
-        %p.message__text
-          hii
-      .message
-        .message__upper-info
-          %p.message__upper-info__talker
-            aaa
-          %p.message__upper-info__date
-            bbb
-        %p.message__text
-          hii
+
+      = render @messages
+
     .form
-      = form_for "", html: {class: "new_message"} do |f|
+      = form_for [@group, @message], html: {class: "new_message"} do |f|
         .input-box
-          = f.text_field :text, class: "input-box__text", placeholder: "Type a message"
+          = f.text_field :content, class: "input-box__text", placeholder: "Type a message"
           %label(class="input-box__image" for="image_file")
             = fa_icon 'image'
             = f.file_field :image, id: "image_file", class: "input-box__image__file"
