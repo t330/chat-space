@@ -65,7 +65,6 @@ $(function(){
 
       .done(function(messages) {
         var insertHTML = '';
-        console.log(messages)
         messages.forEach(function(message) {
           insertHTML = buildHTML(message);
           $('.messages').append(insertHTML);
@@ -75,7 +74,7 @@ $(function(){
       })
 
       .fail(function() {
-        console.log('error');
+        alert('エラーが発生しました');
       })
 
     };
