@@ -1,30 +1,25 @@
 $(function(){
-
   function buildHTML(message){
-
     var image = (message.image) ? image = `<img class="lower-message__image" src="${message.image}" height = 200>` : image = "";
-
     var html = `
-      <div class="message">
-        <div class="message__upper-info">
-          <div class="message__upper-info__talker">
-            ${message.name}
-          </div>
-          <div class="message__upper-info__date">
-            ${message.created_at}
-          </div>
-        </div>
-        <div class="message__text">
-          <p class='lower-message__content'>
-            ${message.content}
-          </p>
-        </div>
-        ${image}
-      </div>
-      `
-
+              <div class="message" data-message-id="${message.id}">
+                <div class="message__upper-info">
+                  <div class="message__upper-info__talker">
+                    ${message.name}
+                  </div>
+                  <div class="message__upper-info__date">
+                    ${message.created_at}
+                  </div>
+                </div>
+                <div class="message__text">
+                  <p class='lower-message__content'>
+                    ${message.content}
+                  </p>
+                </div>
+                ${image}
+              </div>
+              `
     return html;
-
   }
 
   $('#new_message').on('submit', function(e){
@@ -52,8 +47,40 @@ $(function(){
     .fail(function(){
       alert('えらー。メンターさんいつもありがとうございます＾＾');
     })
+
     return false;
-    
   })
 
+  var reloadMessages = function() {
+    last_message_id = $('.message').last().data("message-id");
+    var identifyHTML = window.location.href
+    if (identifyHTML.match(/\/groups\/\d+\/messages/)) {
+
+      $.ajax({
+        url: 'api/messages',
+        type: 'get',
+        dataType: 'json',
+        data: {id: last_message_id}
+      })
+
+      .done(function(messages) {
+        var insertHTML = '';
+        console.log(messages)
+        messages.forEach(function(message) {
+          insertHTML = buildHTML(message);
+          $('.messages').append(insertHTML);
+          $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight}).bind("page:load");
+          })
+
+      })
+
+      .fail(function() {
+        console.log('error');
+      })
+
+    };
+
+  };
+
+  setInterval(reloadMessages, 5000);
 })
