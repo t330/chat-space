@@ -20,3 +20,5 @@ module ChatSpace
     end
   end
 end
+
+config.time_zone = 'Tokyo'
