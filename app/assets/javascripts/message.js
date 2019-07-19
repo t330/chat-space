@@ -45,7 +45,7 @@ $(function(){
     })
     
     .fail(function(){
-      alert('えらー。メンターさんいつもありがとうございます＾＾');
+      alert('メッセージを入力してください');
     })
 
     return false;
